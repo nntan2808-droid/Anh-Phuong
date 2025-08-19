@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Đếm ngược gặp người yêu</title>
+  <meta name="description" content="Trang đếm ngược đến ngày gặp người yêu – triển khai dễ dàng trên GitHub Pages" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --overlay:#0b1220cc;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:#e5e7eb;
+      display:flex; align-items:center; justify-content:center; padding:24px;
+      background:url('your-image.jpg') center/cover no-repeat fixed; /* 👉 đổi link ảnh ở đây */
+      position:relative;
+    }
+    body::before{
+      content:""; position:absolute; inset:0; background:var(--overlay); backdrop-filter: blur(6px);
+    }
+    .wrap{width:min(900px,100%); position:relative; z-index:1}
+    .card{
+      background:linear-gradient(180deg,#0b1220cc,#0b1220cc);
+      border:1px solid #ffffff1a; border-radius:28px; padding:28px; box-shadow:0 20px 60px #0008;
+      backdrop-filter: blur(12px) saturate(140%);
+    }
+    h1{margin:0 0 8px; font-weight:800; font-size:clamp(28px,4vw,40px); letter-spacing:0.2px}
+    .subtitle{opacity:.9; margin-bottom:18px}
+    .timer{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:20px 0 12px}
+    .unit{
+      background:#111827cc; border:1px solid #ffffff14; border-radius:22px; padding:18px 10px; text-align:center;
+    }
+    .num{font-size:clamp(34px,6vw,54px); font-weight:800; line-height:1}
+    .lab{margin-top:6px; font-size:14px; letter-spacing:.6px; opacity:.85; text-transform:uppercase}
+    .names{display:flex; align-items:center; gap:10px; font-size:18px}
+    .heart{display:inline-flex; width:28px; height:28px; align-items:center; justify-content:center; border-radius:999px; background:linear-gradient(45deg,#f472b6,#60a5fa); box-shadow:0 6px 20px #0006}
+    .meta{display:flex; gap:12px; flex-wrap:wrap; opacity:.9; font-size:14px}
+    .pill{border:1px solid #ffffff24; border-radius:999px; padding:6px 10px}
+    .controls{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .btn{cursor:pointer; border:1px solid #ffffff2a; background:#ffffff08; color:#e5e7eb; border-radius:12px; padding:10px 14px; font-weight:600}
+    .btn:hover{background:#ffffff12}
+    .footer{opacity:.7; font-size:12px; margin-top:10px}
+    .done{display:none; align-items:center; gap:10px; margin-top:14px}
+    .done.show{display:flex}
+    canvas#confetti{position:fixed; inset:0; pointer-events:none; z-index:2}
+    @media (max-width:560px){
+      .timer{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="wrap">
+    <div class="card">
+      <div class="names"><span id="names">Anh & Em</span><span class="heart">💗</span></div>
+      <h1 id="title">Đếm ngược đến ngày gặp nhau</h1>
+      <div class="meta">
+        <div class="pill">⏰ <span id="targetText">20:00 31/12/2025</span></div>
+        <div class="pill">📍 <span id="place">TP.HCM</span></div>
+        <div class="pill">⌛ <strong id="dDay"></strong></div>
+      </div>
+
+      <div class="timer" role="timer" aria-live="polite">
+        <div class="unit"><div class="num" id="days">0</div><div class="lab">Ngày</div></div>
+        <div class="unit"><div class="num" id="hours">0</div><div class="lab">Giờ</div></div>
+        <div class="unit"><div class="num" id="mins">0</div><div class="lab">Phút</div></div>
+        <div class="unit"><div class="num" id="secs">0</div><div class="lab">Giây</div></div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="share">Chia sẻ đường link</button>
+        <button class="btn" id="addToCal">Thêm vào Lịch</button>
+      </div>
+
+      <div class="done" id="done"><span style="font-size:22px">🎉</span>
+        <div>
+          <div style="font-weight:800">Tới giờ gặp nhau rồi!</div>
+          <div style="opacity:.8">Chúc hai bạn một buổi hẹn thật tuyệt ✨</div>
+        </div>
+      </div>
+
+      <div class="footer">Tip: có thể cấu hình bằng tham số URL, ví dụ: <code>?date=2025-12-31&time=20:00&name1=Anh&name2=Em&title=Hen%20ho&place=TP.HCM</code></div>
+    </div>
+  </div>
+
+<script>
+// ... giữ nguyên toàn bộ JS countdown & confetti ở phiên bản trước ...
+</script>
+</body>
+</html>
