@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Lần đầu gặp nhau</title>
+  <title>Countdown Gặp Người Yêu</title>
   <style>
     body {
       margin: 0;
@@ -11,47 +11,73 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: url('https://raw.githubusercontent.com/nntan2808-droid/Anh-Phuong/refs/heads/main/anhnen.jfif') no-repeat center center/contain;
-      font-family: Arial, sans-serif;
-      color: white;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      background: url('https://raw.githubusercontent.com/nntan2808-droid/Anh-Phuong/refs/heads/main/anhnen.jfif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    #countdown {
-      font-size: 3em;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 20px 40px;
+
+    .countdown-container {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 30px 50px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      text-align: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .time {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .time div {
+      background: rgba(0,0,0,0.4);
+      padding: 20px;
       border-radius: 15px;
+      min-width: 90px;
+    }
+
+    .time span {
+      display: block;
+      font-size: 2.5rem;
+      color: #00ffcc;
     }
   </style>
 </head>
 <body>
-  <div id="countdown">Đang tải...</div>
+  <div class="countdown-container">
+    <h2>Đếm ngược ngày đầu tiên gặp </h2>
+    <div class="time">
+      <div><span id="days">0</span>Ngày</div>
+      <div><span id="hours">0</span>Giờ</div>
+      <div><span id="minutes">0</span>Phút</div>
+      <div><span id="seconds">0</span>Giây</div>
+    </div>
+  </div>
 
   <script>
-    // Ngày giờ đích: 9/4/2025 17:00
-    const targetDate = new Date("2025-09-04T17:00:00");
+    const countdownDate = new Date("Sep 4, 2025 17:00:00").getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
-      const distance = targetDate - now;
+      const distance = countdownDate - now;
 
-      if (distance <= 0) {
-        document.getElementById("countdown").innerHTML = "Đã đến giờ gặp người yêu ❤️";
-        clearInterval(interval);
+      if (distance < 0) {
+        document.querySelector(".countdown-container").innerHTML = "<h2>💞 Đã đến lúc gặp người yêu rồi! 💞</h2>";
         return;
       }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("countdown").innerHTML =
-        `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+      document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
     }
 
-    const interval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // chạy lần đầu
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
